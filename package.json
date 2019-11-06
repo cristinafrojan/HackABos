@@ -1,0 +1,24 @@
+{
+  "name": "HackABos",
+  "version": "1.0.0",
+  "description": "Algunos ejemplos de ejercicios realizados cursando el bootcamp Hack a Bos",
+  "main": "HacerUnaCompra.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server 'www' --files 'www'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristinafrojan/HackABos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cristinafrojan/HackABos/issues"
+  },
+  "homepage": "https://github.com/cristinafrojan/HackABos#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
