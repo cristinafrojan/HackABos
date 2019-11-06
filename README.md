@@ -1,3 +1,3 @@
 # HackABos
 
-Ejercicios realizados durante el bootcamp Hack a Bos
+Algunos ejemplos de ejercicios realizados cursando el bootcamp Hack a Bos
