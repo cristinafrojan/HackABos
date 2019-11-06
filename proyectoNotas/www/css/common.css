@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald|Press+Start+2P|Raleway:400,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  background: black;
+  color: var(--orange);
+  font-family: Raleway, sans-serif;
+  display: grid;
+  height: 100vh;
+  gap: 1rem;
+  grid-template-rows: auto 1fr;
+}
+
+:root {
+  --dark: black;
+  --gray: #aabbaa;
+  --bright: white;
+  --orange: #f8c51d;
+  --red: #c86818;
+  --green: #3c8c20;
+}
+
+/* Header */
+header {
+  padding: 0.5rem;
+}
+header h1 {
+  font-family: "Press Start 2P", sans-serif;
+}
+
+header h1 a {
+  color: var(--orange);
+  text-decoration: none;
+}
+
+/* Content */
+
+section.auth {
+  align-self: center;
+  justify-self: center;
+  max-width: 30rem;
+  width: 100%;
+}
+
+section.auth form {
+  margin: 0 2rem;
+}
+
+section.auth form h2 {
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+section.auth form fieldset {
+  border: none;
+  margin-bottom: 1rem;
+}
+
+section.auth form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+section.auth form input {
+  border: 2px solid var(--orange);
+  padding: 0.5rem;
+  width: 100%;
+  background-color: var(--dark);
+  color: var(--orange);
+  font-size: 1rem;
+}
+
+section.auth form input::selection {
+  background-color: var(--orange);
+  color: var(--dark);
+}
+
+section.auth form input:focus {
+  transform: scale(1.1);
+}
+
+section.auth form button {
+  background-color: var(--red);
+  color: var(--bright);
+  border: none;
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  display: block;
+  margin-left: auto;
+}
+
+section.auth form p {
+  text-align: right;
+  margin-top: 1rem;
+  color: var(--red);
+}
+
+section.auth form p a {
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* Fieldsets con estado */
+
+section.auth form fieldset.ok {
+  color: var(--green);
+}
+
+section.auth form fieldset.ok input {
+  border-color: var(--green);
+  color: green;
+}
+
+section.auth form fieldset.ok input::selection {
+  background: var(--green);
+  color: var(--bright);
+}
+
+section.auth form fieldset.error {
+  color: var(--red);
+}
+
+section.auth form fieldset.error input {
+  border-color: var(--red);
+  color: red;
+}
+
+section.auth form fieldset.error input::selection {
+  background: var(--red);
+  color: var(--bright);
+}

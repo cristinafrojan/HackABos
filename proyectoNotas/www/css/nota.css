@@ -1,0 +1,206 @@
+@import "common.css";
+
+header {
+  display: flex;
+  align-items: center;
+}
+
+header > * {
+  flex-basis: 33.33%;
+}
+
+header h1 {
+  display: none;
+}
+
+header h2 {
+  text-align: center;
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+}
+
+header nav {
+  order: -1;
+}
+
+header nav button {
+  background-color: transparent;
+  border: none;
+}
+
+header p {
+  text-align: right;
+}
+
+header p a {
+  display: block;
+  color: var(--red);
+  text-transform: uppercase;
+  font-family: Oswald, sans-serif;
+}
+
+/* Content */
+
+main {
+  display: flex;
+  overflow: hidden;
+}
+
+section#content {
+  display: grid;
+  grid-template-columns: 60vw 100vw 100vw;
+  transform: translateX(-60vw);
+  transition: transform 500ms;
+}
+
+section#content.menu {
+  transform: translateX(0);
+}
+
+section#content.menu #notes {
+  opacity: 0.5;
+}
+
+/* Content navigation */
+
+section#content nav {
+  background-color: var(--orange);
+}
+
+section#content nav ul {
+  margin: 1rem 0;
+}
+
+section#content nav ul li {
+  margin: 0.5rem 0;
+  padding: 0.25rem 1rem;
+}
+
+section#content nav ul li.selected {
+  background-color: var(--dark);
+}
+
+section#content nav ul li.selected a {
+  color: var(--orange);
+}
+
+section#content nav ul li a {
+  color: var(--dark);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Notes list */
+
+section#notes {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow: hidden;
+  transition: opacity 500ms;
+}
+
+/* Formulario buscar / nova nota */
+section#notes form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+section#notes form label {
+  display: none;
+}
+
+section#notes form fieldset {
+  border: 0;
+  flex-grow: 1;
+  margin-right: 1rem;
+}
+
+section#notes form input {
+  background: var(--dark);
+  color: var(--orange);
+  padding: 0.75rem;
+  border: 2px solid var(--orange);
+  width: 100%;
+  font-size: 1rem;
+  background-image: url("/img/search.svg");
+  background-repeat: no-repeat;
+  background-position: 0.5rem center;
+  padding-left: 2.5rem;
+}
+
+section#notes form button {
+  background-color: transparent;
+  border: none;
+}
+
+/* Lista de notas */
+
+section#notes ul {
+  list-style: none;
+  overflow-y: auto;
+}
+
+section#notes ul li {
+  /* margin-bottom: 1rem; */
+  padding: 1rem 0.5rem 1rem 0.5rem;
+  border-bottom: 1px solid var(--gray);
+  cursor: pointer;
+  transition: background-color 500ms;
+}
+
+section#notes ul li.selected {
+  background-color: var(--orange);
+  border-bottom: 0.5rem solid var(--red);
+}
+
+section#notes ul li.selected h2 {
+  color: var(--dark);
+}
+
+section#notes ul li.selected p {
+  color: var(--dark);
+}
+
+section#notes ul li h2 {
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+section#notes ul li p {
+  color: var(--gray);
+  font-size: 0.75rem;
+}
+
+@media (min-width: 800px) {
+  body {
+    gap: 0;
+  }
+
+  header > * {
+    flex-basis: 50%;
+  }
+
+  header nav {
+    display: none;
+  }
+
+  header h1 {
+    display: block;
+  }
+
+  header h2 {
+    display: none;
+  }
+
+  section#content {
+    grid-template-columns: 10rem 20rem 1fr;
+    transform: translateX(0);
+  }
+
+  section#notes {
+    padding-top: 0;
+  }
+}
