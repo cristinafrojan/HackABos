@@ -2,13 +2,19 @@
 
 const express = require("express");
 
-const app = express();
+const bodyParser = require("body-parser");
 
-function sum(n1, n2, callback) {
-  setTimeout(() => {
-    const result = n1 + n2;
-    return callback(null, result);
-  }, 2000);
+const app = express();
+app.use(bodyParser.json());
+
+// function sum(n1, n2, callback) {
+//   setTimeout(() => {
+//     const result = n1 + n2;
+//     return callback(null, result);
+//   }, 2000);
+// }
+function sum(n1, n2) {
+  return n1 + n2;
 }
 
 function sub(n1, n2, callback) {
