@@ -12,5 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.26.7"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mysql2": "^2.0.0"
   }
 }

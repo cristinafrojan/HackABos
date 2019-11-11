@@ -6,7 +6,7 @@ header {
 }
 
 header > * {
-  flex-basis: 33.33%;
+  flex-basis: calc(100% / 3);
 }
 
 header h1 {
@@ -15,8 +15,8 @@ header h1 {
 
 header h2 {
   text-align: center;
-  font-family: Oswald, sans-serif;
   text-transform: uppercase;
+  font-family: Oswald, sans-serif;
 }
 
 header nav {
@@ -24,7 +24,7 @@ header nav {
 }
 
 header nav button {
-  background-color: transparent;
+  background: transparent;
   border: none;
 }
 
@@ -35,40 +35,44 @@ header p {
 header p a {
   display: block;
   color: var(--red);
-  text-transform: uppercase;
   font-family: Oswald, sans-serif;
+  text-transform: uppercase;
 }
 
 /* Content */
 
+/* Content: nav */
+
 main {
-  display: flex;
   overflow: hidden;
 }
 
 section#content {
+  height: 100%;
+  transform: translateX(-60vw);
   display: grid;
   grid-template-columns: 60vw 100vw 100vw;
-  transform: translateX(-60vw);
   transition: transform 500ms;
 }
 
-section#content.menu {
+section#content.menu-visible {
   transform: translateX(0);
 }
 
-section#content.menu #notes {
-  opacity: 0.5;
+section#content.menu-visible section#notes {
+  opacity: 0.25;
 }
 
-/* Content navigation */
+section#content.note-visible {
+  transform: translateX(-160vw);
+}
 
 section#content nav {
   background-color: var(--orange);
 }
 
 section#content nav ul {
-  margin: 1rem 0;
+  padding: 1rem 0;
 }
 
 section#content nav ul li {
@@ -77,7 +81,7 @@ section#content nav ul li {
 }
 
 section#content nav ul li.selected {
-  background-color: var(--dark);
+  background: var(--dark);
 }
 
 section#content nav ul li.selected a {
@@ -90,64 +94,71 @@ section#content nav ul li a {
   text-decoration: none;
 }
 
-/* Notes list */
+/* Content: notes */
 
 section#notes {
-  display: flex;
-  flex-direction: column;
   padding: 1rem;
+  display: grid;
+  grid-template-rows: auto 1fr;
   overflow: hidden;
   transition: opacity 500ms;
 }
 
-/* Formulario buscar / nova nota */
 section#notes form {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-section#notes form label {
-  display: none;
-}
-
 section#notes form fieldset {
-  border: 0;
+  border: none;
   flex-grow: 1;
   margin-right: 1rem;
 }
 
+section#notes form label {
+  display: none;
+}
+
 section#notes form input {
+  width: 100%;
   background: var(--dark);
   color: var(--orange);
   padding: 0.75rem;
   border: 2px solid var(--orange);
-  width: 100%;
   font-size: 1rem;
+  padding-left: 2.5rem;
   background-image: url("/img/search.svg");
   background-repeat: no-repeat;
   background-position: 0.5rem center;
-  padding-left: 2.5rem;
+}
+
+section#notes form input::selection {
+  background-color: var(--orange);
+  color: var(--dark);
 }
 
 section#notes form button {
-  background-color: transparent;
+  background: transparent;
   border: none;
 }
 
-/* Lista de notas */
+/* Content: notes list */
 
 section#notes ul {
-  list-style: none;
-  overflow-y: auto;
+  overflow: scroll;
 }
 
 section#notes ul li {
-  /* margin-bottom: 1rem; */
-  padding: 1rem 0.5rem 1rem 0.5rem;
+  padding: 1rem 0.5rem;
   border-bottom: 1px solid var(--gray);
-  cursor: pointer;
-  transition: background-color 500ms;
+}
+
+section#notes ul li h2 {
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 section#notes ul li.selected {
@@ -155,18 +166,8 @@ section#notes ul li.selected {
   border-bottom: 0.5rem solid var(--red);
 }
 
-section#notes ul li.selected h2 {
+section#notes ul li.selected > * {
   color: var(--dark);
-}
-
-section#notes ul li.selected p {
-  color: var(--dark);
-}
-
-section#notes ul li h2 {
-  font-family: Oswald, sans-serif;
-  text-transform: uppercase;
-  font-size: 1rem;
 }
 
 section#notes ul li p {
@@ -174,17 +175,74 @@ section#notes ul li p {
   font-size: 0.75rem;
 }
 
-@media (min-width: 800px) {
-  body {
-    gap: 0;
-  }
+/* Content: note */
 
+article#note {
+  padding: 1rem;
+}
+
+article#note form {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+}
+
+article#note form fieldset {
+  border: none;
+  margin-bottom: 1rem;
+}
+
+article#note form label {
+  display: none;
+}
+
+article#note form input,
+article#note form textarea {
+  width: 100%;
+  height: 100%;
+  background: var(--dark);
+  color: var(--orange);
+  border: none;
+  font-size: 1.25rem;
+  font-family: inherit;
+}
+
+article#note form input#title {
+  font-family: Oswald, sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+article#note form p {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+article#note form p a {
+  font-family: Oswald, sans-serif;
+  color: var(--red);
+  text-transform: uppercase;
+  text-decoration: none;
+  background-image: url("/img/borrar.svg");
+  padding-right: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+article#note form textarea {
+  color: var(--gray);
+}
+
+article#note form button {
+  background-color: transparent;
+  border: none;
+}
+
+/* Big screens */
+
+@media (min-width: 800px) {
   header > * {
     flex-basis: 50%;
-  }
-
-  header nav {
-    display: none;
   }
 
   header h1 {
@@ -195,12 +253,25 @@ section#notes ul li p {
     display: none;
   }
 
+  header nav {
+    display: none;
+  }
+
   section#content {
     grid-template-columns: 10rem 20rem 1fr;
     transform: translateX(0);
   }
 
-  section#notes {
-    padding-top: 0;
+  article#note form button {
+    display: none;
+  }
+
+  section#content.note-visible,
+  section#content.menu-visible {
+    transform: translateX(0);
+  }
+
+  section#content.menu-visible section#notes {
+    opacity: 1;
   }
 }

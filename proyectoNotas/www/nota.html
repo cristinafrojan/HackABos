@@ -101,8 +101,34 @@
           </ul>
         </section>
 
-        <article class="note">
-          Aquí estará a nota...
+        <article id="note">
+          <form action="">
+            <fieldset>
+              <label for="title">Título de la nota</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                value="Lorem ipsum dolor sit amet"
+              />
+            </fieldset>
+            <fieldset>
+              <label for="tags">Tags de la nota</label>
+              <input type="text" name="tags" id="tags" value="#tag1, #tag2" />
+            </fieldset>
+            <p><a href="">Borrar nota</a></p>
+            <fieldset>
+              <label for="text">Texto de la nota</label>
+              <textarea name="text">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi voluptate nesciunt corrupti nemo velit, quas recusandae dolor ipsum modi ipsa pariatur veritatis, aspernatur harum quis? Dolore repellat deleniti nisi qui.
+              </textarea>
+            </fieldset>
+            <section>
+              <button class="GoBack">
+                <img src="/img/GoBack.svg" alt="volver" />
+              </button>
+            </section>
+          </form>
         </article>
       </section>
     </main>
