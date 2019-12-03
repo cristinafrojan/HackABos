@@ -1,0 +1,98 @@
+'use strict';
+
+const Joi = require('@hapi/joi');
+const mysqlPool = require('../../../database/mysql-pool');
+
+async function validate(payload) {
+  const schema = Joi.object({
+    noteId: Joi.string().guid({
+      version: ['uuidv4'],
+    }).required(),
+    userId: Joi.string().guid({
+      version: ['uuidv4'],
+    }).required(),
+    tag: Joi.string().guid({
+      version: ['uuidv4'],
+    }).required(),
+  });
+
+  Joi.assert(payload, schema);
+}
+
+async function getNote(noteId, userId) {
+  const connection = await mysqlPool.getConnection();
+  const getNoteQuery = `SELECT id, title, content,  created_at, updated_at
+    FROM notes
+    WHERE user_id = ?
+      AND id = ?
+      AND deleted_at IS NULL`;
+  const [noteData] = await connection.execute(getNoteQuery, [userId, noteId]);
+  connection.release();
+
+  if (noteData.length < 1) {
+    return null;
+  }
+
+  return noteData[0];
+}
+
+async function addTagToNote(req, res, next) {
+  const { noteId } = req.params;
+  const { userId } = req.claims;
+  const tagData = { ...req.body };
+  const payload = {
+    noteId,
+    userId,
+    ...tagData,
+  };
+
+  try {
+    await validate(payload);
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send(e);
+  }
+
+  try {
+    const note = await getNote(noteId, userId);
+
+    if (!note) {
+      return res.status(404).send();
+    }
+
+
+    const sqlAddTags = 'INSERT INTO notes_tags SET ?';
+    const tagId = tagData.tag;
+    
+    const tagRow = {
+      note_id: noteId,
+      tag_id: tagId,
+      created_at: new Date().toISOString().replace('T', ' ').substring(0, 19),
+    };
+
+    const connection = await mysqlPool.getConnection();
+    try {
+      await connection.query(sqlAddTags, tagRow);
+      connection.release();
+    } catch (e) {
+      console.error(e);
+      connection.release();
+
+      if (e.code !== 'ER_DUP_ENTRY') {
+        return res.status(500).send({
+          message: e.message,
+        });
+      }
+    }
+
+    return res.status(200).send();
+  } catch (e) {
+    console.error(e);
+
+    return res.status(500).send({
+      message: e.message,
+    });
+  }
+}
+
+module.exports = addTagToNote;
